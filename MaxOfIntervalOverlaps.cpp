@@ -15,6 +15,7 @@ There are maximum 3 guests at time 5.
 #include <iostream>
 #include <algorithm> 
 #include <vector>
+#include <string>
 
 using namespace std;
 
