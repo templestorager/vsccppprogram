@@ -27,7 +27,8 @@ vector<vector<int> > threeSum(vector<int>& nums)
     {
         return res;
     }
-    for ( int i = 0; i < (int)nums.size() - 2; i++ ) 
+    cout<< " nums.size() - 2 is " << nums.size() - 2 << endl;
+    for ( int i = 0; i < nums.size() - 2; i++ ) 
     {
         if ( nums[i] > 0 ) 
             break;
@@ -64,7 +65,18 @@ vector<vector<int> > threeSum(vector<int>& nums)
 
 int main()
 {
-    vector<int> test_data{ -1, 4, -1, 0, 0, 0, 0, 0, 1, 2 };
+    // vector<int> test_data{ -1, 4, -1, 0, 0, 0, 0, 0, 1, 2 };
+    vector<int> test_data{ 0 };
+    char ch;
+    int i;
+    i = 321;
+    ch = i;
+    char a = 'A';
+    int  b = 0xA;
+    cout << " i = 0x" << hex << i << " ch = 0x" << hex << (int)ch << endl;
     threeSum(test_data);
+    cout << "*************************" << endl;
+    cout << "a = " << (int) a << "b = " << (int)b << endl;
+
     return 0;
 }
