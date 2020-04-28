@@ -19,9 +19,16 @@ int singleNumber(vector<int>& nums) {
     return -1;
 }
 
+void cal_square( const int& x )
+{
+    cout << "Square of x is " << x*x << endl;
+}
+
 int main()
 {
     vector<int> a{2,2,1};
     int singlenumber = singleNumber(a);
     cout << "singlenumber is " << singlenumber << endl;
+    cal_square( 4 );
+    return 0;
 }
