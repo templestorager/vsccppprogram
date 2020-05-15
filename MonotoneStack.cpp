@@ -30,7 +30,7 @@ vector<int> FindPreviousLessElement( vector<int> &A )
 // This function returns next less element array for a given array using an increasing monotone stack 
 vector<int> FindNextLessElement( vector<int> &A )
 {
-    vector<int> NextLessElement(A.size(),-1);
+    vector<int> NextLessElement( A.size(),A.size() );
     stack<int> s;
     for ( int i = 0; i < A.size(); i++ )
     {
@@ -49,7 +49,7 @@ vector<int> FindNextLessElement( vector<int> &A )
 // This implements the same function as the above one, but starting from the end 
 vector<int> FindNextLessElementReverse( vector<int> &A )
 {
-    vector<int> NextLessElement( A.size(), -1 );
+    vector<int> NextLessElement( A.size(), A.size() );
     stack<int> s;
     for ( int i = A.size() - 1; i >= 0; i-- )
     {
