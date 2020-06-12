@@ -186,6 +186,8 @@ int main()
 }
 #endif 
 
+#if 0
+// The following code explores the virtual table memory layout in a multiple inheritance scenarios
 class Mother {
     int Mother_data;
 public:
@@ -208,7 +210,16 @@ public:
     }
 };
 
-class Son : public Father, public Mother {
+class Uncle {
+    virtual void UncleFoo() {
+        cout << "UncleFoo in Father class" << endl;
+    }
+    virtual void UncleMethod2() {
+        cout << "Uncle shouting another way " << endl;
+    }
+};
+
+class Son : public Father, public Mother, public Uncle {
     int Son_data;
 public:
     virtual void FatherFoo () override {
@@ -216,6 +227,9 @@ public:
     }
     virtual void MotherFoo() override {
         cout << " MotherFoo in Son " << endl;
+    }
+    virtual void UncleFoo () override {
+        cout << " UncleFoo in Son " << endl;
     }
 };
 
@@ -233,9 +247,51 @@ int main()
 {
     Mother m1,m2;
     Father f1,f2;
+    Uncle  u1,u2;
     Son *ps = new Son;
     ps->MotherFoo();
     PrintfMotherFoo( ps );
     ps->FatherFoo();
     PrintFatherFoo( ps );   
 }
+
+// Check the output seriously, you will get it .. 
+/*
+Starting program: /home/huststorager/Desktop/VisualStudioCodeSources/vsccppprogram/VirtualFunction 
+(gdb) info vtbl m1
+vtable for 'Mother' @ 0x400fc0 (subobject @ 0x7fffffffdca0):
+[0]: 0x400b54 <Mother::MotherFoo()>
+[1]: 0x400b80 <Mother::MotherMethod2()>
+(gdb) info vtbl f1
+vtable for 'Father' @ 0x400fa0 (subobject @ 0x7fffffffdcc0):
+[0]: 0x400bac <Father::FatherFoo()>
+[1]: 0x400bd8 <Father::FatherMethod2()>
+(gdb) info vtbl f2
+vtable for 'Father' @ 0x400fa0 (subobject @ 0x7fffffffdcd0):
+[0]: 0x400bac <Father::FatherFoo()>
+[1]: 0x400bd8 <Father::FatherMethod2()>
+(gdb) info vtbl ps
+vtable for 'Son' @ 0x400f10 (subobject @ 0x614c20):
+[0]: 0x400c5c <Son::FatherFoo()>
+[1]: 0x400bd8 <Father::FatherMethod2()>
+[2]: 0x400c88 <Son::MotherFoo()>
+[3]: 0x400cba <Son::UncleFoo()>
+
+vtable for 'Mother' @ 0x400f40 (subobject @ 0x614c30):
+[0]: 0x400cb3 <non-virtual thunk to Son::MotherFoo()>
+[1]: 0x400b80 <Mother::MotherMethod2()>
+
+vtable for 'Uncle' @ 0x400f60 (subobject @ 0x614c40):
+[0]: 0x400ce5 <non-virtual thunk to Son::UncleFoo()>
+[1]: 0x400c30 <Uncle::UncleMethod2()>
+(gdb) 
+*/
+#endif 
+
+#if 1
+// The following code explore the case of virtual inheritance 
+class GrandParent{
+public:
+    
+};
+#endif
