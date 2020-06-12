@@ -231,6 +231,8 @@ void PrintfMotherFoo( Mother *pMother )
 
 int main()
 {
+    Mother m1,m2;
+    Father f1,f2;
     Son *ps = new Son;
     ps->MotherFoo();
     PrintfMotherFoo( ps );
