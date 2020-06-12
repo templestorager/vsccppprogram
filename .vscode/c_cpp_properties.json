@@ -15,7 +15,8 @@
             "cppStandard": "c++17",
             "intelliSenseMode": "clang-x86",
             "compilerArgs": [
-                "-std=c++11"
+                "-std=c++14",
+                "-g"
             ]
         }
     ],

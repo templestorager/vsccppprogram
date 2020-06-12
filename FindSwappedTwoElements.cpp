@@ -16,19 +16,49 @@ void FindSwappedValue( const vector<int> &nums, int &x, int &y )
         if ( nums[i] > nums[i+1] )
         {
             idx1 = i;
+            idx2 = i + 1;
+            for ( int j = i+2; j < nums.size(); j++ )
+            {
+                if ( nums[j] < nums[idx2] )
+                {
+                    idx2 = j;
+                }
+            }
+            
+        }
+        if ( idx2 != -1 )
+            break;
+    }
+    
+    x = nums[idx1];
+    y = nums[idx2];
+}
+
+void FindSwappedValue2( const vector<int> &nums, int &x, int &y )
+{
+    int idx1 = -1, idx2 = -1;
+
+    for ( int i = 0; i < nums.size()-1; i++ )
+    {
+        if ( nums[i] > nums[i+1] )
+        {
+            idx1 = i;
             for ( int j = i+1; j < nums.size(); j++ )
             {
-                if ( nums[j] < nums[idx1] )
+                if ( nums[j] < nums[idx1+1] )
                 {
                     idx2 = j;
                     break;
                 }
             }
+
         }
+        if ( idx2 != -1 )
+            break;
     }
-    
+
     x = nums[idx1];
-    y = nums[idx2];
+    y = nums[idx2 != -1 ? idx2 : nums.size()-1];
 }
 
 void PrintVector( const vector<int> &vec )
@@ -46,11 +76,45 @@ void PrintVector( const vector<int> &vec )
     }
 }
 
+void sortByOneSwap( vector<int> &arr ) 
+{ 
+    int n = arr.size();
+    // Traverse the given array from rightmost side 
+    for (int i = n-1; i > 0; i--) 
+    { 
+        // Check if arr[i] is not in order 
+        if (arr[i] < arr[i-1]) 
+        { 
+            // Find the other element to be 
+            // swapped with arr[i] 
+            int j = i-1; 
+            while (j>=0 && arr[i] < arr[j]) 
+                j--; 
+  
+            // Swap the pair 
+            cout << "Swapped values are " << arr[i] << " and " << arr[j+1] << endl;
+            swap(arr[i], arr[j+1]); 
+            break; 
+        } 
+    } 
+} 
+
 int main()
 {
     int x, y;
-    vector<int> data{10, 30, 20, 40, 50, 60, 70};
+    string a = "ABCDEF";
+    vector<int> data{1,3,2,4};
     PrintVector(data);
-    FindSwappedValue( data,x,y);
+    FindSwappedValue2( data,x,y);
     cout << "The swapped values are x = " << x << " y = " << y << endl;
+    sortByOneSwap(data);
+    cout << "After fix " << endl;
+    PrintVector(data);
+
+    cout << " Before pop_back a = " << a << endl;
+
+    a.pop_back();
+
+    cout << "After pop_back a = " << a << endl;
+
 }

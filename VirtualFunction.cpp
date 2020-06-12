@@ -69,7 +69,7 @@ int main()
 }
 #endif
 
-#if 1
+#if 0
 // The following code tests the virtual table 
 class Base {
 public:
@@ -98,3 +98,142 @@ int main()
     delete m;
 }
 #endif
+
+#if 0
+
+// Command to look at the memory layout of class
+// clang -cc1 -fdump-record-layouts VirtualFunction.cpp
+class Base {
+    int Base_data;
+public:
+   virtual void Greeting() {
+        cout << "Greetings from Base (100) " << endl;
+    }
+};
+
+class Base2 {
+    int Base2_data;
+public:
+    virtual void Greeting() {
+        cout << "Greetings from Base2 (300) " << endl;
+    }
+};
+
+class Derived : public Base {
+    int Derived_data;
+public:
+    void Greeting() {
+        cout << "Greetings from Derived (200) " << endl;
+    }
+};
+
+class Derived3 : public Base2, public Base
+{
+    int Derived3_data;
+public:
+    void Greeting() {
+        cout << "Greetings from Derived3 (400) " << endl;
+    }
+};
+
+void Print( Base *pBase )
+{
+    pBase->Greeting();
+}
+
+void Print2 ( Base2 *pDerived3 )
+{
+    pDerived3->Greeting();
+}
+
+int main()
+{
+    Base *pBase = new Derived;
+    pBase->Greeting();
+    Print( pBase );
+    Base *pB2 = new Derived3;
+    pB2->Greeting();
+    Print( pB2 );
+    Base2 *pB3 = new Derived3;
+    pB3->Greeting();
+    Print2( pB3 );
+}
+#endif 
+
+#if 0
+class Parent {
+    int Parent_data;
+public:
+    virtual void Foo() {}
+    virtual void FooNotOverriden() {};
+};
+
+class Derived : public Parent {
+    int Derived_data;
+public:
+    void Foo() override {}
+};
+
+void PauseBreak()
+{
+    cout << "Line for breakpoint" << endl;
+}
+int main()
+{
+    Parent p1, p2;
+    Derived d1, d2;
+    cout << "Done " << endl;
+}
+#endif 
+
+class Mother {
+    int Mother_data;
+public:
+    virtual void MotherFoo() {
+        cout << "MotherFoo in Mother" << endl;
+    }
+    virtual void MotherMethod2() {
+        cout << "Mother shouting another way " << endl;
+    }
+};
+
+class Father {
+    int Father_data;
+public:
+    virtual void FatherFoo() {
+        cout << "FatherFoo in Father class" << endl;
+    }
+    virtual void FatherMethod2() {
+        cout << "Father shouting another way " << endl;
+    }
+};
+
+class Son : public Father, public Mother {
+    int Son_data;
+public:
+    virtual void FatherFoo () override {
+        cout << " FatherFoo in Son " << endl;
+    }
+    virtual void MotherFoo() override {
+        cout << " MotherFoo in Son " << endl;
+    }
+};
+
+void PrintFatherFoo( Father *pFather )
+{
+    pFather->FatherFoo();
+}
+
+void PrintfMotherFoo( Mother *pMother )
+{
+    pMother->MotherFoo();
+}
+
+int main()
+{
+    Son *ps = new Son;
+    ps->MotherFoo();
+    PrintfMotherFoo( ps );
+    ps->FatherFoo();
+    PrintFatherFoo( ps );   
+}
