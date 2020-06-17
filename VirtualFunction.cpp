@@ -256,8 +256,7 @@ int main()
 }
 
 // Check the output seriously, you will get it .. 
-/*
-Starting program: /home/huststorager/Desktop/VisualStudioCodeSources/vsccppprogram/VirtualFunction 
+/* 
 (gdb) info vtbl m1
 vtable for 'Mother' @ 0x400fc0 (subobject @ 0x7fffffffdca0):
 [0]: 0x400b54 <Mother::MotherFoo()>
@@ -284,14 +283,5 @@ vtable for 'Mother' @ 0x400f40 (subobject @ 0x614c30):
 vtable for 'Uncle' @ 0x400f60 (subobject @ 0x614c40):
 [0]: 0x400ce5 <non-virtual thunk to Son::UncleFoo()>
 [1]: 0x400c30 <Uncle::UncleMethod2()>
-(gdb) 
 */
 #endif 
-
-#if 1
-// The following code explore the case of virtual inheritance 
-class GrandParent{
-public:
-    
-};
-#endif
