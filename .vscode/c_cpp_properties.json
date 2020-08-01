@@ -22,7 +22,8 @@
                 "-Weffc++ ",
                 "-Wextra ",
                 "-Wsign-conversion",
-                "-Werror"
+                "-Werror",
+                "-Wc++17-extensions"
             ]
         }
     ],

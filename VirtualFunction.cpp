@@ -186,7 +186,7 @@ int main()
 }
 #endif 
 
-#if 0
+#if 1
 // The following code explores the virtual table memory layout in a multiple inheritance scenarios
 class Mother {
     int Mother_data;
@@ -209,6 +209,8 @@ public:
         cout << "Father shouting another way " << endl;
     }
 };
+
+
 
 class Uncle {
     virtual void UncleFoo() {

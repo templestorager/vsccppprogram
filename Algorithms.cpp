@@ -36,11 +36,20 @@ public:
     }
 };
 
+template <typename T >
+T Maxof( T a, T b )
+{
+    return (a > b ? a : b);
+}
+
 int main()
 {
     vector<int> data = { 2,3,4,5,72,21};
     stable_partition( data.begin(), data.end(), [](int n ) { return n % 2 == 0; } ); // put all even numbers before odd numbers 
-
+    const char str[] = "abcd";
+    string hello = "Hello World!";
+    cout << "strlen(str) is " << strlen(str) << " sizeof(str) is " << sizeof(str) << endl;
+    cout << "strlen(str) is " << strlen(hello.c_str()) << " hello.size() is " << hello.size() << endl;
     for ( auto n : data )
         cout << n << " ";
     cout << endl;
