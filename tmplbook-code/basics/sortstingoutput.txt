@@ -1,0 +1,6 @@
+apple
+banana
+dog
+horse
+organge
+pig
